@@ -2,9 +2,15 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Veiculo
 from .forms import VeiculoForm
 
+
+def home(request):
+    return render(request, 'home.html')
+
+
 def veiculo_list(request):
     veiculos = Veiculo.objects.all()
     return render(request, 'veiculo_list.html', {'veiculos': veiculos})
+
 
 def veiculo_create(request):
     if request.method == 'POST':
@@ -16,6 +22,7 @@ def veiculo_create(request):
         form = VeiculoForm()
     return render(request, 'veiculo_form.html', {'form': form, 'titulo': 'Cadastrar Veículo'})
 
+
 def veiculo_update(request, pk):
     veiculo = get_object_or_404(Veiculo, pk=pk)
     if request.method == 'POST':
@@ -26,6 +33,7 @@ def veiculo_update(request, pk):
     else:
         form = VeiculoForm(instance=veiculo)
     return render(request, 'veiculo_form.html', {'form': form, 'titulo': 'Editar Veículo'})
+
 
 def veiculo_delete(request, pk):
     veiculo = get_object_or_404(Veiculo, pk=pk)
