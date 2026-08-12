@@ -7,10 +7,15 @@ from .forms import VeiculoForm
 def home(request):
     return render(request, 'home.html')
 
-
+@login_required
 def veiculo_list(request):
     veiculos = Veiculo.objects.all()
     return render(request, 'veiculo_list.html', {'veiculos': veiculos})
+
+
+def veiculo_list_publico(request):
+    veiculos = Veiculo.objects.all()
+    return render(request, 'veiculo_list_publico.html', {'veiculos': veiculos})
 
 
 @login_required
